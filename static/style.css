@@ -1,0 +1,366 @@
+/* Custom styles - style.css */
+body {
+    /* Tailwind handles most base styling */
+}
+
+.upload-item {
+    /* Add any specific styling for upload items if needed */
+}
+
+/* Loader animation */
+.loader {
+    border: 4px solid #f3f3f3; /* Light grey */
+    border-top: 4px solid #8b5cf6; /* Purple-600 */
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Styling for tables to ensure they are readable in dark mode */
+table th, table td {
+    border-color: #4a5568; /* gray-700 for darker borders */
+}
+
+/* Ensure select dropdowns are styled consistently with Tailwind if needed */
+select {
+    appearance: none; /* Remove default system appearance */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem; /* Add padding to prevent text from overlapping the arrow */
+}
+
+/* Custom scrollbar for tables if desired (Webkit browsers) */
+.overflow-x-auto::-webkit-scrollbar {
+    height: 8px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-track {
+    background: #374151; /* gray-700 */
+    border-radius: 10px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb {
+    background: #6b21a8; /* purple-700 */
+    border-radius: 10px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb:hover {
+    background: #5b21b6; /* purple-600 */
+}
+
+.max-h-96::-webkit-scrollbar, .max-h-72::-webkit-scrollbar {
+    width: 8px;
+}
+
+.max-h-96::-webkit-scrollbar-track, .max-h-72::-webkit-scrollbar-track {
+    background: #374151; /* gray-700 */
+    border-radius: 10px;
+}
+
+.max-h-96::-webkit-scrollbar-thumb, .max-h-72::-webkit-scrollbar-thumb {
+    background: #6b21a8; /* purple-700 */
+    border-radius: 10px;
+}
+
+.max-h-96::-webkit-scrollbar-thumb:hover, .max-h-72::-webkit-scrollbar-thumb:hover {
+    background: #5b21b6; /* purple-600 */
+}
+
+/* Estilos para os gráficos */
+#graficos-section canvas {
+    max-height: 300px;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+#graficos-section .bg-gray-800 {
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+}
+
+#graficos-section h3 {
+    margin-bottom: 1rem;
+}
+
+/* Estilos para a tabela pivotada */
+#tabela-pivotada {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+#tabela-pivotada th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: #374151; /* gray-700 */
+    white-space: nowrap;
+    text-align: center !important;
+    padding: 0.75rem 1rem;
+}
+
+#tabela-pivotada td {
+    text-align: center !important;
+    padding: 0.75rem 1rem;
+    white-space: nowrap;
+    transition: color 0.2s ease-in-out;
+}
+
+/* Ajuste para o cabeçalho da tabela */
+#tabela-pivotada thead th {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background-color: #374151; /* gray-700 */
+}
+
+/* Ajuste para as células fixas */
+#tabela-pivotada td:first-child,
+#tabela-pivotada td:nth-child(2),
+#tabela-pivotada td:nth-child(3),
+#tabela-pivotada td:nth-child(4) {
+    text-align: center !important;
+    position: sticky;
+    background-color: inherit;
+    z-index: 1;
+}
+
+/* Ajuste para o cabeçalho das células fixas */
+#tabela-pivotada th:first-child,
+#tabela-pivotada th:nth-child(2),
+#tabela-pivotada th:nth-child(3),
+#tabela-pivotada th:nth-child(4) {
+    position: sticky;
+    z-index: 30;
+    background-color: #374151; /* gray-700 */
+    text-align: center !important;
+}
+
+/* Ajuste para as larguras das colunas fixas */
+#tabela-pivotada td:first-child {
+    left: 0;
+    width: 120px;
+}
+
+#tabela-pivotada td:nth-child(2) {
+    left: 120px;
+    width: 200px;
+}
+
+#tabela-pivotada td:nth-child(3) {
+    left: 320px;
+    width: 100px;
+}
+
+#tabela-pivotada td:nth-child(4) {
+    left: 420px;
+    width: 100px;
+}
+
+/* Estilos para as barras de rolagem da tabela pivotada */
+.overflow-y-auto::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+    background: #374151; /* gray-700 */
+    border-radius: 10px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+    background: #6b21a8; /* purple-700 */
+    border-radius: 10px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+    background: #5b21b6; /* purple-600 */
+}
+
+/* Ajuste para a sombra de rolagem */
+.overflow-y-auto {
+    position: relative;
+}
+
+.overflow-y-auto::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 30px;
+    background: linear-gradient(to right, transparent, rgba(17, 24, 39, 0.8));
+    pointer-events: none;
+    z-index: 30;
+}
+
+.overflow-y-auto::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background: linear-gradient(to bottom, transparent, rgba(17, 24, 39, 0.8));
+    pointer-events: none;
+    z-index: 30;
+}
+
+/* Ajuste para o container da tabela pivotada */
+.max-h-96 {
+    max-height: 24rem; /* 384px */
+}
+
+/* Estilo para linhas em tiras */
+#tabela-pivotada tbody tr:nth-child(even) {
+    background-color: #374151; /* gray-700 */
+}
+
+#tabela-pivotada tbody tr:nth-child(odd) {
+    background-color: #1F2937; /* gray-800 */
+}
+
+#tabela-pivotada tbody tr:hover {
+    background-color: #4B5563 !important; /* gray-600 */
+}
+
+#tabela-pivotada tbody tr:hover td {
+    color: #E5E7EB !important; /* gray-200 */
+}
+
+/* Estilo para destacar linhas com o mesmo produto */
+#tabela-pivotada tbody tr.highlight-produto td {
+    color: #60A5FA !important; /* blue-400 */
+    font-weight: 500;
+}
+
+/* Estilo para células com valores zero */
+#tabela-pivotada td:empty::after {
+    content: '';
+    color: #6B7280; /* gray-500 */
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    #graficos-section .grid {
+        grid-template-columns: 1fr;
+    }
+    
+    #tabela-pivotada {
+        font-size: 0.875rem;
+    }
+    
+    #tabela-pivotada td, #tabela-pivotada th {
+        padding: 0.5rem;
+    }
+}
+
+/* Estilos para a Layer de Carregamento */
+#loading-layer {
+    backdrop-filter: blur(4px);
+    transition: opacity 0.3s ease-in-out;
+}
+
+#loading-layer.hidden {
+    display: none;
+}
+
+/* Animação do spinner */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+
+
+/* Estilos para as abas */
+.tab-button {
+    transition: all 0.3s ease;
+}
+
+.tab-button.active {
+    border-color: #8b5cf6; /* purple-500 */
+    color: #a78bfa; /* purple-400 */
+}
+
+.tab-content {
+    display: block;
+}
+
+.tab-content.hidden {
+    display: none;
+}
+
+/* Animação para mudança de abas */
+.tab-content {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Estilos específicos para o log do Sankhya */
+#sankhya-log {
+    scrollbar-width: thin;
+    scrollbar-color: #6b7280 #374151;
+}
+
+#sankhya-log::-webkit-scrollbar {
+    width: 8px;
+}
+
+#sankhya-log::-webkit-scrollbar-track {
+    background: #374151;
+    border-radius: 4px;
+}
+
+#sankhya-log::-webkit-scrollbar-thumb {
+    background: #6b7280;
+    border-radius: 4px;
+}
+
+#sankhya-log::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
+
+/* Estilos para mensagens de status */
+.status-success {
+    color: #10b981; /* green-500 */
+}
+
+.status-error {
+    color: #ef4444; /* red-500 */
+}
+
+.status-warning {
+    color: #f59e0b; /* yellow-500 */
+}
+
+.status-info {
+    color: #3b82f6; /* blue-500 */
+}
+

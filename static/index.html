@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sankhya Automation</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body class="bg-gray-900 text-white font-sans">
+    <div id="loading-layer" class="fixed inset-0 bg-gray-900 bg-opacity-90 z-50 flex items-center justify-center hidden">
+        <div class="text-center">
+            <div class="inline-block animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-purple-500 mb-4"></div>
+            <p class="text-xl text-purple-400 font-semibold">Processando...</p>
+        </div>
+    </div>
+
+    <div class="container mx-auto p-4 md:p-8">
+        <header class="mb-8 text-center">
+            <h1 class="text-4xl font-bold text-purple-400">Sankhya Automation</h1>
+            <p class="text-gray-400">Automação de Ordens de Produção</p>
+        </header>
+
+        <!-- Conteúdo do Sankhya Automation -->
+        <div id="content-sankhya">
+            <section id="sankhya-config-section" class="mb-10 p-6 bg-gray-800 rounded-lg shadow-xl">
+                <h2 class="text-2xl font-semibold mb-6 text-purple-300 border-b-2 border-purple-300 pb-2">1. Configurar Parâmetros de Automação</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div>
+                        <label for="data-planejamento" class="block mb-2 text-sm font-medium text-gray-300">Data do Planejamento:</label>
+                        <input type="date" id="data-planejamento"
+                            class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                    </div>
+                    <div>
+                        <label for="braco-sankhya" class="block mb-2 text-sm font-medium text-gray-300">Braço:</label>
+                        <input type="number" id="braco-sankhya" value="1" min="1"
+                            class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                    </div>
+                    <div>
+                        <label for="rodada-inicial" class="block mb-2 text-sm font-medium text-gray-300">Rodada Inicial:</label>
+                        <input type="number" id="rodada-inicial" value="1" min="1"
+                            class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                    </div>
+                    <div>
+                        <label for="rodada-final" class="block mb-2 text-sm font-medium text-gray-300">Rodada Final:</label>
+                        <input type="number" id="rodada-final" value="1" min="1"
+                            class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                    </div>
+                </div>
+            </section>
+
+            <section id="sankhya-action-section" class="mb-10 text-center">
+                <button id="verificar-conexoes-btn"
+                    class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 mr-4">
+                    <i class="fas fa-plug mr-2"></i>
+                    Verificar Conexões
+                </button>
+                <button id="buscar-planejamentos-btn"
+                    class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-8 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 mr-4 hidden">
+                    <i class="fas fa-search mr-2"></i>
+                    Buscar Planejamentos
+                </button>
+                <button id="processar-automacao-btn"
+                    class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 hidden">
+                    <i class="fas fa-play mr-2"></i>
+                    Iniciar Automação
+                </button>
+            </section>
+
+            <section id="sankhya-status-section" class="mb-10 p-6 bg-gray-800 rounded-lg shadow-xl">
+                <h2 class="text-2xl font-semibold mb-6 text-purple-300 border-b-2 border-purple-300 pb-2">Status da Automação</h2>
+                <div id="sankhya-log" class="bg-gray-900 p-4 rounded-lg h-64 overflow-y-auto font-mono text-sm">
+                    <p class="text-gray-400">Aguardando início da automação...</p>
+                </div>
+            </section>
+
+            <section id="sankhya-progress-section" class="mb-10 p-6 bg-gray-800 rounded-lg shadow-xl hidden">
+                <h2 class="text-2xl font-semibold mb-6 text-purple-300 border-b-2 border-purple-300 pb-2">Progresso do Processamento</h2>
+                <div class="mb-4">
+                    <div class="flex justify-between text-sm text-gray-300 mb-1">
+                        <span>Progresso</span>
+                        <span id="progress-text">0%</span>
+                    </div>
+                    <div class="w-full bg-gray-700 rounded-full h-2.5">
+                        <div id="progress-bar" class="bg-purple-500 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-3 gap-4 text-center">
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <div class="text-2xl font-bold text-green-400" id="ops-criadas">0</div>
+                        <div class="text-sm text-gray-300">OPs Criadas</div>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <div class="text-2xl font-bold text-red-400" id="ops-falhas">0</div>
+                        <div class="text-sm text-gray-300">Falhas</div>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <div class="text-2xl font-bold text-blue-400" id="rodada-atual">-</div>
+                        <div class="text-sm text-gray-300">Rodada Atual</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="sankhya-resumo-section" class="mb-10 p-6 bg-gray-800 rounded-lg shadow-xl hidden">
+                <h2 class="text-2xl font-semibold mb-6 text-purple-300 border-b-2 border-purple-300 pb-2">Resumo Final</h2>
+                <div id="resumo-content">
+                    <!-- Resumo será carregado aqui -->
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="sankhya_script.js"></script>
+</body>
+</html>
