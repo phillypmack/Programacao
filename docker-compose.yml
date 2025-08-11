@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  sankhya-automation:
+    # Constrói a imagem a partir do Dockerfile no diretório atual
+    build:
+      context: .
+      dockerfile: Dockerfile
+    
+    # Nome amigável para o container
+    container_name: sankhya_op_automation_app
+
+    # --- Ponto Chave para Segurança e Configuração ---
+    # Carrega as variáveis de ambiente do arquivo .env local.
+    # Isso injeta suas credenciais de banco e API no container sem expô-las no código.
+    env_file:
+      - .env
+
+    ports:
+      # Mapeia a porta 5001 do seu servidor (host) para a porta 5000 do container (onde o Flask está rodando)
+      - "5000:5000"
+    
+    # Política de reinicialização. 'no' é ideal para scripts manuais.
+    restart: 'always'  # Pode ser 'no', 'always', 'on-failure', etc.
