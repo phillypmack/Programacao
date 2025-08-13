@@ -26,14 +26,21 @@ class OracleDatabase:
         
     def connect(self) -> bool:
         """
-        Estabelece conexão com o banco de dados Oracle.
-        
-        Returns:
-            bool: True se a conexão foi estabelecida com sucesso, False caso contrário.
+        Estabelece conexão com o banco de dados Oracle, habilitando o pré-ping
+        para manter as conexões vivas.
         """
         try:
             logger.info("Conectando ao banco de dados Oracle...")
-            self.engine = create_engine(ORACLE_DATABASE_URI, echo=False)
+            
+            # --- MELHORIA ADICIONADA AQUI ---
+            # pool_pre_ping=True instrui o SQLAlchemy a verificar a conexão
+            # antes de cada operação, evitando erros de timeout.
+            self.engine = create_engine(
+                ORACLE_DATABASE_URI, 
+                echo=False,
+                pool_pre_ping=True
+            )
+            
             self.connection = self.engine.connect()
             logger.info("Conexão com o banco de dados estabelecida com sucesso.")
             return True
